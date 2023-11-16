@@ -14,12 +14,12 @@ public class MozijegyVasar extends javax.swing.JFrame {
      * Creates new form MozijegyVasar
      */
     
-    int film, tipus, db, vegOsszeg;
+    int film, tipus, db, alapOsszeg, vegOsszeg;
     
     public MozijegyVasar() {
         initComponents();
-        vegOsszeg = 0;
-        film = 0;
+        alapOsszeg = 0;
+        film = comFilm.getSelectedIndex();
         
         db = (int) spnDb.getValue();
         
@@ -43,7 +43,7 @@ public class MozijegyVasar extends javax.swing.JFrame {
         lblMozijegy = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comFilm = new javax.swing.JComboBox<>();
         btnLefoglal = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         spnSor1 = new javax.swing.JSpinner();
@@ -59,7 +59,8 @@ public class MozijegyVasar extends javax.swing.JFrame {
         spnDb = new javax.swing.JSpinner();
         rbtHaromD = new javax.swing.JRadioButton();
         rbtNegyDx = new javax.swing.JRadioButton();
-        rbtVip = new javax.swing.JRadioButton();
+        rbtKettoD = new javax.swing.JRadioButton();
+        chbVip = new javax.swing.JCheckBox();
         chbDiak = new javax.swing.JCheckBox();
         chbAfa = new javax.swing.JCheckBox();
         txtOsszes = new javax.swing.JTextField();
@@ -99,7 +100,12 @@ public class MozijegyVasar extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Film:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Válasszon filmet!", "Az alkotó", "Az apáca II.", "A védelmező 3.", "Cicaverzum", "Feláldozh4tók", "Fűrész X", "Gran Turismo" }));
+        comFilm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Válasszon filmet!", "Az alkotó", "Az apáca II.", "A védelmező 3.", "Cicaverzum", "Feláldozh4tók", "Fűrész X", "Gran Turismo" }));
+        comFilm.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comFilmItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -109,7 +115,7 @@ public class MozijegyVasar extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comFilm, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -118,7 +124,7 @@ public class MozijegyVasar extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comFilm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -209,15 +215,42 @@ public class MozijegyVasar extends javax.swing.JFrame {
         jLabel2.setText("Darab:");
 
         spnDb.setModel(new javax.swing.SpinnerNumberModel(1, 1, 3, 1));
+        spnDb.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnDbStateChanged(evt);
+            }
+        });
 
         btgTipus.add(rbtHaromD);
         rbtHaromD.setText("3D");
+        rbtHaromD.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rbtHaromDItemStateChanged(evt);
+            }
+        });
 
         btgTipus.add(rbtNegyDx);
         rbtNegyDx.setText("4DX");
+        rbtNegyDx.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rbtNegyDxItemStateChanged(evt);
+            }
+        });
 
-        btgTipus.add(rbtVip);
-        rbtVip.setText("VIP");
+        btgTipus.add(rbtKettoD);
+        rbtKettoD.setText("2D");
+        rbtKettoD.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rbtKettoDItemStateChanged(evt);
+            }
+        });
+
+        chbVip.setText("VIP");
+        chbVip.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chbVipItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -225,14 +258,16 @@ public class MozijegyVasar extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(rbtHaromD, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(rbtNegyDx, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rbtKettoD, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rbtVip, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rbtHaromD, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addComponent(rbtNegyDx, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chbVip, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spnDb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -241,11 +276,12 @@ public class MozijegyVasar extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
                     .addComponent(spnDb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rbtHaromD)
                     .addComponent(rbtNegyDx)
-                    .addComponent(rbtVip))
+                    .addComponent(rbtKettoD)
+                    .addComponent(chbVip))
                 .addContainerGap())
         );
 
@@ -273,15 +309,12 @@ public class MozijegyVasar extends javax.swing.JFrame {
                         .addComponent(chbDiak)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(chbAfa, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtOsszes)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtOsszes)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblOsszeg)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnLefoglal)))
-                        .addContainerGap())))
+                        .addGap(6, 6, 6)
+                        .addComponent(lblOsszeg)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLefoglal))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {chbAfa, chbDiak});
@@ -313,9 +346,53 @@ public class MozijegyVasar extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void spnDbStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnDbStateChanged
+        db = (int) spnDb.getValue();
+        osszegSzamolas();
+    }//GEN-LAST:event_spnDbStateChanged
+
+    private void rbtKettoDItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtKettoDItemStateChanged
+        if(rbtKettoD.isSelected()){
+            tipus = 0;
+        }
+        osszegSzamolas();
+    }//GEN-LAST:event_rbtKettoDItemStateChanged
+
+    private void rbtHaromDItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtHaromDItemStateChanged
+        if(rbtHaromD.isSelected()) {
+            tipus = 500;
+        }
+        osszegSzamolas();
+    }//GEN-LAST:event_rbtHaromDItemStateChanged
+
+    private void rbtNegyDxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbtNegyDxItemStateChanged
+        if(rbtNegyDx.isSelected()) {
+            tipus = 1750;
+        }
+        osszegSzamolas();
+    }//GEN-LAST:event_rbtNegyDxItemStateChanged
+
+    private void chbVipItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chbVipItemStateChanged
+        if(chbVip.isSelected()) {
+            tipus += 5500;
+        } else {
+             tipus -= 5500;
+        }
+    }//GEN-LAST:event_chbVipItemStateChanged
+
+    private void comFilmItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comFilmItemStateChanged
+        if(film == 0) {
+            alapOsszeg = 0;
+        } else {
+            alapOsszeg = 2500;
+        }
+        film = comFilm.getSelectedIndex();
+        osszegSzamolas();
+    }//GEN-LAST:event_comFilmItemStateChanged
     
     private void osszegSzamolas(){
-        vegOsszeg = film + tipus;
+        vegOsszeg = alapOsszeg + tipus;
         vegOsszeg *= db;
         lblOsszeg.setText("Összeg: "+ vegOsszeg + " Ft");
     }
@@ -360,7 +437,8 @@ public class MozijegyVasar extends javax.swing.JFrame {
     private javax.swing.JButton btnLefoglal;
     private javax.swing.JCheckBox chbAfa;
     private javax.swing.JCheckBox chbDiak;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JCheckBox chbVip;
+    private javax.swing.JComboBox<String> comFilm;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -372,8 +450,8 @@ public class MozijegyVasar extends javax.swing.JFrame {
     private javax.swing.JLabel lblMozijegy;
     private javax.swing.JLabel lblOsszeg;
     private javax.swing.JRadioButton rbtHaromD;
+    private javax.swing.JRadioButton rbtKettoD;
     private javax.swing.JRadioButton rbtNegyDx;
-    private javax.swing.JRadioButton rbtVip;
     private javax.swing.JSpinner spnDb;
     private javax.swing.JSpinner spnSor1;
     private javax.swing.JSpinner spnSor2;
