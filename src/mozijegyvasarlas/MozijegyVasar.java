@@ -14,7 +14,8 @@ public class MozijegyVasar extends javax.swing.JFrame {
      * Creates new form MozijegyVasar
      */
     
-    int film, tipus, db, alapOsszeg, vegOsszeg;
+    int film, tipus, db, alapOsszeg;
+    double jegySzorzo, vegOsszeg;
     
     public MozijegyVasar() {
         initComponents();
@@ -24,6 +25,16 @@ public class MozijegyVasar extends javax.swing.JFrame {
         db = (int) spnDb.getValue();
         
         tipus = 0;
+        
+        jegySzorzo = 1;
+        
+        rbtKettoD.setEnabled(false);
+        rbtHaromD.setEnabled(false);
+        rbtNegyDx.setEnabled(false);
+        chbVip.setEnabled(false);
+        spnDb.setEnabled(false);
+        spnSor1.setEnabled(false);
+        spnSzek1.setEnabled(false);
         
         osszegSzamolas();
         
@@ -63,8 +74,9 @@ public class MozijegyVasar extends javax.swing.JFrame {
         chbVip = new javax.swing.JCheckBox();
         chbDiak = new javax.swing.JCheckBox();
         chbAfa = new javax.swing.JCheckBox();
-        txtOsszes = new javax.swing.JTextField();
         lblOsszeg = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txaOsszes = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mozijegy Vásárlás");
@@ -129,6 +141,11 @@ public class MozijegyVasar extends javax.swing.JFrame {
         );
 
         btnLefoglal.setText("Lefoglalás");
+        btnLefoglal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLefoglalActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Hely"));
 
@@ -286,13 +303,23 @@ public class MozijegyVasar extends javax.swing.JFrame {
         );
 
         chbDiak.setText("A vásárló diák");
+        chbDiak.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chbDiakItemStateChanged(evt);
+            }
+        });
 
         chbAfa.setText("ÁFÁ-s számla");
 
-        txtOsszes.setEditable(false);
-        txtOsszes.setToolTipText("");
-
         lblOsszeg.setText("Összeg: ");
+
+        jScrollPane1.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jScrollPane1.setEnabled(false);
+
+        txaOsszes.setEditable(false);
+        txaOsszes.setColumns(20);
+        txaOsszes.setRows(5);
+        jScrollPane1.setViewportView(txaOsszes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -309,12 +336,15 @@ public class MozijegyVasar extends javax.swing.JFrame {
                         .addComponent(chbDiak)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(chbAfa, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtOsszes)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lblOsszeg)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLefoglal))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lblOsszeg)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnLefoglal)))
+                        .addContainerGap())))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {chbAfa, chbDiak});
@@ -334,9 +364,9 @@ public class MozijegyVasar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chbDiak)
                     .addComponent(chbAfa))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtOsszes, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLefoglal)
                     .addComponent(lblOsszeg))
@@ -349,6 +379,22 @@ public class MozijegyVasar extends javax.swing.JFrame {
 
     private void spnDbStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnDbStateChanged
         db = (int) spnDb.getValue();
+        if(db == 2) {
+            spnSor2.setEnabled(true);
+            spnSzek2.setEnabled(true);
+            spnSor3.setEnabled(false);
+            spnSzek3.setEnabled(false);
+        } else if(db == 3) {
+            spnSor2.setEnabled(true);
+            spnSzek2.setEnabled(true);
+            spnSor3.setEnabled(true);
+            spnSzek3.setEnabled(true);
+        } else {
+            spnSor2.setEnabled(false);
+            spnSzek2.setEnabled(false);
+            spnSor3.setEnabled(false);
+            spnSzek3.setEnabled(false);
+        }
         osszegSzamolas();
     }//GEN-LAST:event_spnDbStateChanged
 
@@ -379,20 +425,84 @@ public class MozijegyVasar extends javax.swing.JFrame {
         } else {
              tipus -= 5500;
         }
+        osszegSzamolas();
     }//GEN-LAST:event_chbVipItemStateChanged
 
     private void comFilmItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comFilmItemStateChanged
         if(film == 0) {
             alapOsszeg = 0;
+            rbtKettoD.setEnabled(false);
+            rbtHaromD.setEnabled(false);
+            rbtNegyDx.setEnabled(false);
+            chbVip.setEnabled(false);
+            spnDb.setEnabled(false);
+            spnSor1.setEnabled(false);
+            spnSzek1.setEnabled(false);
         } else {
             alapOsszeg = 2500;
+            rbtKettoD.setEnabled(true);
+            rbtHaromD.setEnabled(true);
+            rbtNegyDx.setEnabled(true);
+            chbVip.setEnabled(true);
+            spnDb.setEnabled(true);
+            spnSor1.setEnabled(true);
+            spnSzek1.setEnabled(true);
         }
         film = comFilm.getSelectedIndex();
         osszegSzamolas();
     }//GEN-LAST:event_comFilmItemStateChanged
+
+    private void chbDiakItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chbDiakItemStateChanged
+        if(chbDiak.isSelected()) {
+            jegySzorzo = .78;
+        } else {
+            jegySzorzo = 1;
+        }
+        osszegSzamolas();
+    }//GEN-LAST:event_chbDiakItemStateChanged
+
+    private void btnLefoglalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLefoglalActionPerformed
+        String filmFajta = (String) comFilm.getSelectedItem();
+        
+        String eloadasMod;
+        if(rbtKettoD.isSelected()) {
+            eloadasMod = "2D";
+        } else if(rbtHaromD.isSelected()) {
+            eloadasMod = "3D";
+        } else {
+            eloadasMod = "4DX";
+        }
+        
+        String vanVip;
+        if(chbVip.isSelected()) {
+            vanVip = " (VIP)";
+        } else {
+            vanVip = "";
+        }
+        
+        String jegyTipus;
+        if(chbDiak.isSelected()) {
+            jegyTipus = "Diák";
+        } else {
+            jegyTipus = "Felnőtt";
+        }
+        
+        String hanyDb = db + "db)";
+        
+        String afa;
+        if(chbAfa.isSelected()) {
+            afa = "\nÁFÁ-s számlát kértek";
+        } else {
+            afa = "\nÁFÁ-s számlát NEM kértek";
+        }
+        
+        String uzenet = "A választott film: "+ filmFajta +"\nJegy típusa: "+ jegyTipus +"\nElőadás módja: "+ eloadasMod + vanVip +" ("+ hanyDb + afa;
+        
+        txaOsszes.setText(uzenet);
+    }//GEN-LAST:event_btnLefoglalActionPerformed
     
     private void osszegSzamolas(){
-        vegOsszeg = alapOsszeg + tipus;
+        vegOsszeg = alapOsszeg * jegySzorzo + tipus;
         vegOsszeg *= db;
         lblOsszeg.setText("Összeg: "+ vegOsszeg + " Ft");
     }
@@ -447,6 +557,7 @@ public class MozijegyVasar extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblMozijegy;
     private javax.swing.JLabel lblOsszeg;
     private javax.swing.JRadioButton rbtHaromD;
@@ -459,6 +570,6 @@ public class MozijegyVasar extends javax.swing.JFrame {
     private javax.swing.JSpinner spnSzek1;
     private javax.swing.JSpinner spnSzek2;
     private javax.swing.JSpinner spnSzek3;
-    private javax.swing.JTextField txtOsszes;
+    private javax.swing.JTextArea txaOsszes;
     // End of variables declaration//GEN-END:variables
 }
