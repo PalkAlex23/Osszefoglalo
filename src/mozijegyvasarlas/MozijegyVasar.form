@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="btgTipus">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Mozijegy V&#xe1;s&#xe1;rl&#xe1;s"/>
@@ -36,6 +40,11 @@
                   <Component id="jPanel3" max="32767" attributes="0"/>
                   <Component id="jPanel4" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
+                      <Component id="chbDiak" linkSize="6" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="chbAfa" linkSize="6" min="-2" pref="183" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtOsszes" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
@@ -43,11 +52,6 @@
                               <Component id="lblOsszeg" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnLefoglal" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="jCheckBox1" linkSize="6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jCheckBox2" linkSize="6" min="-2" pref="183" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -69,8 +73,8 @@
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jCheckBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="chbDiak" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="chbAfa" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="txtOsszes" pref="85" max="32767" attributes="0"/>
@@ -173,11 +177,15 @@
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="8">
+                <StringItem index="0" value="V&#xe1;lasszon filmet!"/>
+                <StringItem index="1" value="Az alkot&#xf3;"/>
+                <StringItem index="2" value="Az ap&#xe1;ca II."/>
+                <StringItem index="3" value="A v&#xe9;delmez&#x151; 3."/>
+                <StringItem index="4" value="Cicaverzum"/>
+                <StringItem index="5" value="Fel&#xe1;ldozh4t&#xf3;k"/>
+                <StringItem index="6" value="F&#x171;r&#xe9;sz X"/>
+                <StringItem index="7" value="Gran Turismo"/>
               </StringArray>
             </Property>
           </Properties>
@@ -211,33 +219,25 @@
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Component id="spnSor1" linkSize="4" min="-2" pref="120" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="spnSzek1" linkSize="4" min="-2" pref="140" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
+                          <EmptySpace min="41" pref="41" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                  <Component id="spnSor2" linkSize="5" min="-2" pref="120" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="41" pref="41" max="-2" attributes="0"/>
-                                  <Component id="spnSor3" linkSize="5" min="-2" pref="120" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="spnSor2" linkSize="5" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                              <Component id="spnSor3" linkSize="5" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="spnSzek2" linkSize="5" pref="140" max="32767" attributes="0"/>
                               <Component id="spnSzek3" max="32767" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="spnSzek2" linkSize="5" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -351,16 +351,16 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="chb3d" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                  <Component id="chb4dx" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="chbVIP" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="rbtHaromD" min="-2" pref="65" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  <Component id="rbtNegyDx" min="-2" pref="65" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="rbtVip" min="-2" pref="75" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="48" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Component id="spnDb" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -371,9 +371,9 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" max="32767" attributes="0"/>
                       <Component id="spnDb" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chb3d" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chb4dx" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chbVIP" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbtHaromD" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbtNegyDx" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbtVip" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -394,32 +394,47 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="chb3d">
+        <Component class="javax.swing.JRadioButton" name="rbtHaromD">
           <Properties>
+            <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="default"/>
+            </Property>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="btgTipus"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="3D"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="chb4dx">
+        <Component class="javax.swing.JRadioButton" name="rbtNegyDx">
           <Properties>
+            <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="default"/>
+            </Property>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="btgTipus"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="4DX"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="chbVIP">
+        <Component class="javax.swing.JRadioButton" name="rbtVip">
           <Properties>
+            <Property name="model" type="javax.swing.ButtonModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="default"/>
+            </Property>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="btgTipus"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="VIP"/>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+    <Component class="javax.swing.JCheckBox" name="chbDiak">
       <Properties>
         <Property name="text" type="java.lang.String" value="A v&#xe1;s&#xe1;rl&#xf3; di&#xe1;k"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox1ActionPerformed"/>
-      </Events>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox2">
+    <Component class="javax.swing.JCheckBox" name="chbAfa">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc1;F&#xc1;-s sz&#xe1;mla"/>
       </Properties>
